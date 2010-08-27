@@ -1,0 +1,417 @@
+<?xml version="1.0"?>
+<zabbix_export version="1.0" date="01.04.10" time="01.12">
+	<hosts>
+		<host name="OurDelta_MySQL_Replication_1.7">
+			<useip>0</useip>
+			<dns></dns>
+			<ip></ip>
+			<port>10050</port>
+			<status>3</status>
+			<groups>
+				<group>Templates</group>
+			</groups>
+			<items>
+				<item type="2" key="mysql_replication.replication_status" value_type="3">
+					<description>MySQL: General: Replication Status </description>
+					<ipmi_sensor></ipmi_sensor>
+					<delay>300</delay>
+					<history>7</history>
+					<trends>365</trends>
+					<status>0</status>
+					<units></units>
+					<multiplier>0</multiplier>
+					<delta>0</delta>
+					<formula>1</formula>
+					<lastlogsize>0</lastlogsize>
+					<logtimefmt></logtimefmt>
+					<delay_flex></delay_flex>
+					<params></params>
+					<trapper_hosts></trapper_hosts>
+					<snmp_community></snmp_community>
+					<snmp_oid></snmp_oid>
+					<snmp_port>161</snmp_port>
+					<snmpv3_securityname></snmpv3_securityname>
+					<snmpv3_securitylevel>0</snmpv3_securitylevel>
+					<snmpv3_authpassphrase></snmpv3_authpassphrase>
+					<snmpv3_privpassphrase></snmpv3_privpassphrase>
+					<applications>
+						<application>MySQL Replication</application>
+					</applications>
+				</item>
+				<item type="2" key="mysql_replication.master_enabled" value_type="3">
+					<description>MySQL: Master: Master Enabled</description>
+					<ipmi_sensor></ipmi_sensor>
+					<delay>300</delay>
+					<history>7</history>
+					<trends>365</trends>
+					<status>0</status>
+					<units></units>
+					<multiplier>0</multiplier>
+					<delta>0</delta>
+					<formula>1</formula>
+					<lastlogsize>0</lastlogsize>
+					<logtimefmt></logtimefmt>
+					<delay_flex></delay_flex>
+					<params></params>
+					<trapper_hosts></trapper_hosts>
+					<snmp_community></snmp_community>
+					<snmp_oid></snmp_oid>
+					<snmp_port>161</snmp_port>
+					<snmpv3_securityname></snmpv3_securityname>
+					<snmpv3_securitylevel>0</snmpv3_securitylevel>
+					<snmpv3_authpassphrase></snmpv3_authpassphrase>
+					<snmpv3_privpassphrase></snmpv3_privpassphrase>
+					<applications>
+						<application>MySQL Replication</application>
+					</applications>
+				</item>
+				<item type="2" key="mysql_replication.slave_enabled" value_type="3">
+					<description>MySQL: Slave: Slave Enabled</description>
+					<ipmi_sensor></ipmi_sensor>
+					<delay>300</delay>
+					<history>7</history>
+					<trends>365</trends>
+					<status>0</status>
+					<units></units>
+					<multiplier>0</multiplier>
+					<delta>0</delta>
+					<formula>1</formula>
+					<lastlogsize>0</lastlogsize>
+					<logtimefmt></logtimefmt>
+					<delay_flex></delay_flex>
+					<params></params>
+					<trapper_hosts></trapper_hosts>
+					<snmp_community></snmp_community>
+					<snmp_oid></snmp_oid>
+					<snmp_port>161</snmp_port>
+					<snmpv3_securityname></snmpv3_securityname>
+					<snmpv3_securitylevel>0</snmpv3_securitylevel>
+					<snmpv3_authpassphrase></snmpv3_authpassphrase>
+					<snmpv3_privpassphrase></snmpv3_privpassphrase>
+					<applications>
+						<application>MySQL Replication</application>
+					</applications>
+				</item>
+				<item type="2" key="mysql_replication.slave_host_count" value_type="3">
+					<description>MySQL: Master: Slave Host Count</description>
+					<ipmi_sensor></ipmi_sensor>
+					<delay>300</delay>
+					<history>7</history>
+					<trends>365</trends>
+					<status>0</status>
+					<units></units>
+					<multiplier>0</multiplier>
+					<delta>0</delta>
+					<formula>1</formula>
+					<lastlogsize>0</lastlogsize>
+					<logtimefmt></logtimefmt>
+					<delay_flex></delay_flex>
+					<params></params>
+					<trapper_hosts></trapper_hosts>
+					<snmp_community></snmp_community>
+					<snmp_oid></snmp_oid>
+					<snmp_port>161</snmp_port>
+					<snmpv3_securityname></snmpv3_securityname>
+					<snmpv3_securitylevel>0</snmpv3_securitylevel>
+					<snmpv3_authpassphrase></snmpv3_authpassphrase>
+					<snmpv3_privpassphrase></snmpv3_privpassphrase>
+					<applications>
+						<application>MySQL Replication</application>
+					</applications>
+				</item>
+				<item type="2" key="mysql_replication.slave_io_state" value_type="3">
+					<description>MySQL: Slave: Slave IO State</description>
+					<ipmi_sensor></ipmi_sensor>
+					<delay>300</delay>
+					<history>7</history>
+					<trends>365</trends>
+					<status>0</status>
+					<units></units>
+					<multiplier>0</multiplier>
+					<delta>0</delta>
+					<formula>1</formula>
+					<lastlogsize>0</lastlogsize>
+					<logtimefmt></logtimefmt>
+					<delay_flex></delay_flex>
+					<params></params>
+					<trapper_hosts></trapper_hosts>
+					<snmp_community></snmp_community>
+					<snmp_oid></snmp_oid>
+					<snmp_port>161</snmp_port>
+					<snmpv3_securityname></snmpv3_securityname>
+					<snmpv3_securitylevel>0</snmpv3_securitylevel>
+					<snmpv3_authpassphrase></snmpv3_authpassphrase>
+					<snmpv3_privpassphrase></snmpv3_privpassphrase>
+					<applications>
+						<application>MySQL Replication</application>
+					</applications>
+				</item>
+				<item type="2" key="mysql_replication.slave_io_running" value_type="3">
+					<description>MySQL: Slave: Slave IO Running</description>
+					<ipmi_sensor></ipmi_sensor>
+					<delay>300</delay>
+					<history>7</history>
+					<trends>365</trends>
+					<status>0</status>
+					<units></units>
+					<multiplier>0</multiplier>
+					<delta>0</delta>
+					<formula>1</formula>
+					<lastlogsize>0</lastlogsize>
+					<logtimefmt></logtimefmt>
+					<delay_flex></delay_flex>
+					<params></params>
+					<trapper_hosts></trapper_hosts>
+					<snmp_community></snmp_community>
+					<snmp_oid></snmp_oid>
+					<snmp_port>161</snmp_port>
+					<snmpv3_securityname></snmpv3_securityname>
+					<snmpv3_securitylevel>0</snmpv3_securitylevel>
+					<snmpv3_authpassphrase></snmpv3_authpassphrase>
+					<snmpv3_privpassphrase></snmpv3_privpassphrase>
+					<applications>
+						<application>MySQL Replication</application>
+					</applications>
+				</item>
+				<item type="2" key="mysql_replication.slave_sql_running" value_type="3">
+					<description>MySQL: Slave: Slave SQL Running</description>
+					<ipmi_sensor></ipmi_sensor>
+					<delay>300</delay>
+					<history>7</history>
+					<trends>365</trends>
+					<status>0</status>
+					<units></units>
+					<multiplier>0</multiplier>
+					<delta>0</delta>
+					<formula>1</formula>
+					<lastlogsize>0</lastlogsize>
+					<logtimefmt></logtimefmt>
+					<delay_flex></delay_flex>
+					<params></params>
+					<trapper_hosts></trapper_hosts>
+					<snmp_community></snmp_community>
+					<snmp_oid></snmp_oid>
+					<snmp_port>161</snmp_port>
+					<snmpv3_securityname></snmpv3_securityname>
+					<snmpv3_securitylevel>0</snmpv3_securitylevel>
+					<snmpv3_authpassphrase></snmpv3_authpassphrase>
+					<snmpv3_privpassphrase></snmpv3_privpassphrase>
+					<applications>
+						<application>MySQL Replication</application>
+					</applications>
+				</item>
+				<item type="2" key="mysql_replication.read_master_log_pos" value_type="3">
+					<description>MySQL: Slave: Read Master Log Position</description>
+					<ipmi_sensor></ipmi_sensor>
+					<delay>300</delay>
+					<history>7</history>
+					<trends>365</trends>
+					<status>0</status>
+					<units></units>
+					<multiplier>0</multiplier>
+					<delta>0</delta>
+					<formula>1</formula>
+					<lastlogsize>0</lastlogsize>
+					<logtimefmt></logtimefmt>
+					<delay_flex></delay_flex>
+					<params></params>
+					<trapper_hosts></trapper_hosts>
+					<snmp_community></snmp_community>
+					<snmp_oid></snmp_oid>
+					<snmp_port>161</snmp_port>
+					<snmpv3_securityname></snmpv3_securityname>
+					<snmpv3_securitylevel>0</snmpv3_securitylevel>
+					<snmpv3_authpassphrase></snmpv3_authpassphrase>
+					<snmpv3_privpassphrase></snmpv3_privpassphrase>
+					<applications>
+						<application>MySQL Replication</application>
+					</applications>
+				</item>
+				<item type="2" key="mysql_replication.seconds_behind_master" value_type="3">
+					<description>MySQL: Slave: Seconds Behind Master</description>
+					<ipmi_sensor></ipmi_sensor>
+					<delay>300</delay>
+					<history>7</history>
+					<trends>365</trends>
+					<status>0</status>
+					<units></units>
+					<multiplier>0</multiplier>
+					<delta>0</delta>
+					<formula>1</formula>
+					<lastlogsize>0</lastlogsize>
+					<logtimefmt></logtimefmt>
+					<delay_flex></delay_flex>
+					<params></params>
+					<trapper_hosts></trapper_hosts>
+					<snmp_community></snmp_community>
+					<snmp_oid></snmp_oid>
+					<snmp_port>161</snmp_port>
+					<snmpv3_securityname></snmpv3_securityname>
+					<snmpv3_securitylevel>0</snmpv3_securitylevel>
+					<snmpv3_authpassphrase></snmpv3_authpassphrase>
+					<snmpv3_privpassphrase></snmpv3_privpassphrase>
+					<applications>
+						<application>MySQL Replication</application>
+					</applications>
+				</item>
+				<item type="2" key="mysql_replication.skip_counter" value_type="3">
+					<description>MySQL: Slave: Skip Counter</description>
+					<ipmi_sensor></ipmi_sensor>
+					<delay>300</delay>
+					<history>7</history>
+					<trends>365</trends>
+					<status>0</status>
+					<units></units>
+					<multiplier>0</multiplier>
+					<delta>0</delta>
+					<formula>1</formula>
+					<lastlogsize>0</lastlogsize>
+					<logtimefmt></logtimefmt>
+					<delay_flex></delay_flex>
+					<params></params>
+					<trapper_hosts></trapper_hosts>
+					<snmp_community></snmp_community>
+					<snmp_oid></snmp_oid>
+					<snmp_port>161</snmp_port>
+					<snmpv3_securityname></snmpv3_securityname>
+					<snmpv3_securitylevel>0</snmpv3_securitylevel>
+					<snmpv3_authpassphrase></snmpv3_authpassphrase>
+					<snmpv3_privpassphrase></snmpv3_privpassphrase>
+					<applications>
+						<application>MySQL Replication</application>
+					</applications>
+				</item>
+				<item type="2" key="mysql_replication.exec_master_log_pos" value_type="3">
+					<description>MySQL: Slave: Exec Master Log Position</description>
+					<ipmi_sensor></ipmi_sensor>
+					<delay>300</delay>
+					<history>7</history>
+					<trends>365</trends>
+					<status>0</status>
+					<units></units>
+					<multiplier>0</multiplier>
+					<delta>0</delta>
+					<formula>1</formula>
+					<lastlogsize>0</lastlogsize>
+					<logtimefmt></logtimefmt>
+					<delay_flex></delay_flex>
+					<params></params>
+					<trapper_hosts></trapper_hosts>
+					<snmp_community></snmp_community>
+					<snmp_oid></snmp_oid>
+					<snmp_port>161</snmp_port>
+					<snmpv3_securityname></snmpv3_securityname>
+					<snmpv3_securitylevel>0</snmpv3_securitylevel>
+					<snmpv3_authpassphrase></snmpv3_authpassphrase>
+					<snmpv3_privpassphrase></snmpv3_privpassphrase>
+					<applications>
+						<application>MySQL Replication</application>
+					</applications>
+				</item>
+				<item type="2" key="mysql_replication.relay_log_space" value_type="3">
+					<description>MySQL: Slave: Relay Log Space</description>
+					<ipmi_sensor></ipmi_sensor>
+					<delay>300</delay>
+					<history>7</history>
+					<trends>365</trends>
+					<status>0</status>
+					<units></units>
+					<multiplier>0</multiplier>
+					<delta>0</delta>
+					<formula>1</formula>
+					<lastlogsize>0</lastlogsize>
+					<logtimefmt></logtimefmt>
+					<delay_flex></delay_flex>
+					<params></params>
+					<trapper_hosts></trapper_hosts>
+					<snmp_community></snmp_community>
+					<snmp_oid></snmp_oid>
+					<snmp_port>161</snmp_port>
+					<snmpv3_securityname></snmpv3_securityname>
+					<snmpv3_securitylevel>0</snmpv3_securitylevel>
+					<snmpv3_authpassphrase></snmpv3_authpassphrase>
+					<snmpv3_privpassphrase></snmpv3_privpassphrase>
+					<applications>
+						<application>MySQL Replication</application>
+					</applications>
+				</item>
+				<item type="2" key="mysql_replication.slave_errors" value_type="3">
+					<description>MySQL: Slave: Slave Errors</description>
+					<ipmi_sensor></ipmi_sensor>
+					<delay>300</delay>
+					<history>7</history>
+					<trends>365</trends>
+					<status>0</status>
+					<units></units>
+					<multiplier>0</multiplier>
+					<delta>0</delta>
+					<formula>1</formula>
+					<lastlogsize>0</lastlogsize>
+					<logtimefmt></logtimefmt>
+					<delay_flex></delay_flex>
+					<params></params>
+					<trapper_hosts></trapper_hosts>
+					<snmp_community></snmp_community>
+					<snmp_oid></snmp_oid>
+					<snmp_port>161</snmp_port>
+					<snmpv3_securityname></snmpv3_securityname>
+					<snmpv3_securitylevel>0</snmpv3_securitylevel>
+					<snmpv3_authpassphrase></snmpv3_authpassphrase>
+					<snmpv3_privpassphrase></snmpv3_privpassphrase>
+					<applications>
+						<application>MySQL Replication</application>
+					</applications>
+				</item>
+				<item type="2" key="mysql_replication.master_binlog_position" value_type="3">
+					<description>MySQL: Master: Master Binlog Position</description>
+					<ipmi_sensor></ipmi_sensor>
+					<delay>300</delay>
+					<history>7</history>
+					<trends>365</trends>
+					<status>0</status>
+					<units></units>
+					<multiplier>0</multiplier>
+					<delta>0</delta>
+					<formula>1</formula>
+					<lastlogsize>0</lastlogsize>
+					<logtimefmt></logtimefmt>
+					<delay_flex></delay_flex>
+					<params></params>
+					<trapper_hosts></trapper_hosts>
+					<snmp_community></snmp_community>
+					<snmp_oid></snmp_oid>
+					<snmp_port>161</snmp_port>
+					<snmpv3_securityname></snmpv3_securityname>
+					<snmpv3_securitylevel>0</snmpv3_securitylevel>
+					<snmpv3_authpassphrase></snmpv3_authpassphrase>
+					<snmpv3_privpassphrase></snmpv3_privpassphrase>
+					<applications>
+						<application>MySQL Replication</application>
+					</applications>
+				</item>
+			</items>
+			<triggers>
+				<trigger>
+					<description>MySQL Replication: Replication Status on {HOSTNAME}</description>
+					<type>0</type>
+					<expression>{{HOSTNAME}:mysql_replication.replication_status.last(0)}=0</expression>
+					<url></url>
+					<status>0</status>
+					<priority>3</priority>
+					<comments>Replication is not running or is not enabled on this server.</comments>
+				</trigger>
+				<trigger>
+					<description>MySQL Replication: Slave Errors on  {HOSTNAME}</description>
+					<type>0</type>
+					<expression>{{HOSTNAME}:mysql_replication.slave_errors.last(0)}=1</expression>
+					<url></url>
+					<status>0</status>
+					<priority>3</priority>
+					<comments>This slave is reporting errors.</comments>
+				</trigger>
+			</triggers>
+		</host>
+	</hosts>
+	<dependencies>
+	</dependencies>
+</zabbix_export>
