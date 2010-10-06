@@ -1,13 +1,11 @@
 README
-This is our first attempt at a more modular zabbix monitor. These scripts have lived in stand-alone format for a month or so, but it's a real hassle to handle multiple scripts and configuration files.
+Ok, these scripts have seen some production use and need to be streamlined a bit. Callously I am only going to test these against 1.8.3 - good luck with older versions.
 
-There is support for a couple of modules but the mysql_general module is the only one that is ready.
-The nginx module is not quite ready and you have to have configured/built nginx with the stub_status_module enabled.
-The apache module is still dev so dont bother with it; its just here so you can see what is coming in the next release.
+We migrated from launchpad to github, just coz we like githib and bitbucket took too long to join with atlassian.
 
 INSTALL (Quick and Dirty)
 1. Install Files in the /etc/zabbix directory
-2.  Open up the config file eg. vim /etc/zabbix/config/zabbix-monitor-config.php
+2.  Open up the config file eg. vim /etc/zabbix/config/memene_config.php
 
 3. Set the location for your zabbix_agent/zabbix_agentd. The script needs access to this file so it can zabbix post.
 	$GLOBALS['zabbix']['config_location'] = "/etc/zabbix/zabbix_agentd.conf";

@@ -2,23 +2,23 @@
 //we have to declare this here
 $GLOBALS['zabbix']['config_directory'] = "/etc/zabbix/";
 //require all include files
-require_once($GLOBALS['zabbix']['config_directory']."/config/zabbix-monitor-config.php");
-require_once($GLOBALS['zabbix']['config_directory']."/common/zabbix-monitor-common.php");
+require_once($GLOBALS['zabbix']['config_directory']."/config/memene_config.php");
+require_once($GLOBALS['zabbix']['config_directory']."/common/memene_common.php");
 
 class zabbixMonitor {
 	protected $software_version = 1;
 	private $module;
 	private $api_version;
-	
+
 	public function __construct() {
 		if ($GLOBALS['zabbix']['debug_mode']) zabbixCommon::debugLog(get_class($this));
 		$this->includeModuleFiles();
 		$this->initializeModuleClasses();
 		$this->versionCheck();
 	}
-	
+
 	private function includeModuleFiles() {
-		//read modules global and include accordingly	
+		//read modules global and include accordingly
 		if (!isset($GLOBALS['modules'])) {
 			$error = "Hmmm, I cannot see my module configuration.";
 			if ($GLOBALS['zabbix']['debug_mode']) {
@@ -42,7 +42,7 @@ class zabbixMonitor {
 			} else {
 				throw new Exception($error);
 			}
-		} 
+		}
 		foreach($GLOBALS['modules'] as $value) {
 			$module_file = $GLOBALS['zabbix']['config_directory']."modules/zabbix_". $value .".php";
 			if(is_file($module_file)) {
@@ -62,12 +62,12 @@ class zabbixMonitor {
 			eval("\$this->module['".$value."'] = new ".$value."();");
 		}
 		echo 1;
-		exit(0);	
+		exit(0);
 	}
 	private function versionCheck() {
 		//this function is ready for the zabbix api
 	}
-	
+
 }
 
 $zm = new zabbixMonitor();
