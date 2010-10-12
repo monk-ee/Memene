@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <zabbix_export version="1.0" date="01.04.10" time="01.12">
 	<hosts>
-		<host name="OurDelta_Monitor_Controller_1.7">
+		<host name="Memene_Monitor_Controller_1">
 			<useip>0</useip>
 			<dns></dns>
 			<ip></ip>
@@ -11,8 +11,8 @@
 				<group>Templates</group>
 			</groups>
 			<items>
-				<item type="2" key="zabbix_monitor.daily" value_type="3">
-					<description>Zabbix Monitor: Daily Controller</description>
+				<item type="0" key="memene.daily" value_type="3">
+					<description>Memene Monitor: Daily Controller</description>
 					<ipmi_sensor></ipmi_sensor>
 					<delay>86400</delay>
 					<history>7</history>
@@ -35,11 +35,11 @@
 					<snmpv3_authpassphrase></snmpv3_authpassphrase>
 					<snmpv3_privpassphrase></snmpv3_privpassphrase>
 					<applications>
-						<application>Zabbix Monitor</application>
+						<application>Memene Monitor</application>
 					</applications>
 				</item>
-				<item type="2" key="zabbix_monitor.live" value_type="3">
-					<description>Zabbix Monitor: Live Controller</description>
+				<item type="0" key="memene.live" value_type="3">
+					<description>Memene Monitor: Live Controller</description>
 					<ipmi_sensor></ipmi_sensor>
 					<delay>120</delay>
 					<history>7</history>
@@ -62,29 +62,29 @@
 					<snmpv3_authpassphrase></snmpv3_authpassphrase>
 					<snmpv3_privpassphrase></snmpv3_privpassphrase>
 					<applications>
-						<application>Zabbix Monitor</application>
+						<application>Memene Monitor</application>
 					</applications>
 				</item>
 			</items>
 			<triggers>
 				<trigger>
-					<description>Zabbix Live Monitor is not running on {HOSTNAME}</description>
+					<description>Memene Live Monitor is not running on {HOSTNAME}</description>
 					<type>0</type>
-					<expression>{{HOSTNAME}:zabbix_monitor.live.last(0)}&lt;1</expression>
+					<expression>{{HOSTNAME}:memene.live.last(0)}&lt;1</expression>
 					<url></url>
 					<status>0</status>
 					<priority>2</priority>
-					<comments>Zabbix Live Monitor is not running.</comments>
+					<comments>Memene Live Monitor is not running.</comments>
 				</trigger>
 				<trigger>
-					<description>Zabbix Daily Monitor is not running on {HOSTNAME}</description>
+					<description>Memene Daily Monitor is not running on {HOSTNAME}</description>
 					<type>0</type>
-					<expression>{{HOSTNAME}:zabbix_monitor.daily.last(0)}&lt;1</expression>
+					<expression>{{HOSTNAME}:memene.daily.last(0)}&lt;1</expression>
 					<url></url>
 					<status>0</status>
 					<priority>2</priority>
-					<comments>Zabbix Daily Monitor is not running on {HOSTNAME}</comments>
-				</trigger>			
+					<comments>Memene Daily Monitor is not running on {HOSTNAME}</comments>
+				</trigger>
 			</triggers>
 		</host>
 	</hosts>

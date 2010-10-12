@@ -5,25 +5,24 @@ class zabbixCommon {
 	protected $zabbix_config;
 	protected $host;
 	protected $server;
-	protected $log = "/tmp/zabbix.log";
-	protected $dat = "/tmp/zabbix.dat";
-	protected $utime = "/var/tmp/.zabbix.utime";
-	protected $dtime = "/var/tmp/.zabbix.dtime";
-	
-	public function close($a,$b) { 
+	protected $dat = $GLOBALS['memene']['config_directory']."zabbix.dat";
+	protected $utime = $GLOBALS['memene']['config_directory']."zabbix.utime";
+	protected $dtime = $GLOBALS['memene']['config_directory']."zabbix.dtime";
+
+	public function close($a,$b) {
 		if ( $a == 0 && $b > 1 ) return 0;
 		if ( $b == 0 && $a > 1 ) return 0;
 		$delta = abs($b-$a)*100/$a;
 		return $delta < 90;
 	}
-	public function kb($a) { 
-		return $a*1024; 
+	public function kb($a) {
+		return $a*1024;
 	}
-	public function mb($a) { 
-		return $a*1024*1024; 
+	public function mb($a) {
+		return $a*1024*1024;
 	}
-	public function gb($a) { 
-		return $a*1024*1024*1024; 
+	public function gb($a) {
+		return $a*1024*1024*1024;
 	}
 	public function byte_size($size) {
 		$filesizename = array("", "K", "M", "G", "T", "P", "E", "Z", "Y");
@@ -37,12 +36,12 @@ class zabbixCommon {
 	}
 	public function zabbix_config() {
 		//BE WARNED preg_match will match any reference at all to hostname / server you must remove defaults or commented out values so they are not picked up
-		if ( file_exists($this->dat) ) unlink($this->dat);
-		if ( file_exists($this->log) ) unlink($this->log);
+		//if ( file_exists($this->dat) ) unlink($this->dat); //@todo figure out what this is for
+		//if ( file_exists($this->log) ) unlink($this->log);
 		// Get server information for zabbix_sender
-		$this->zabbix_config = file_get_contents($GLOBALS['zabbix']['config_location']);
+		$this->zabbix_config = file_get_contents($GLOBALS['memene']['config_location']);
 		if (!$this->zabbix_config) {
-			throw new Exception("Failed to get file contents for the zabbix configuration file. You told me the location was ". $GLOBALS['zabbix']['config_location']);
+			throw new Exception("Failed to get file contents for the zabbix configuration file. You told me the location was ". $GLOBALS['memene']['config_location']);
 		}
 		preg_match("/Hostname\s*=\s*(.*)/i",$this->zabbix_config,$parts);
 		$this->host = $parts[1];
@@ -67,11 +66,11 @@ class zabbixCommon {
 		if ( !is_numeric($val) ) {
 			$val = '"'.$val.'"';
 		}
-		file_put_contents($this->dat,"$this->server $this->host ". $GLOBALS['zabbix']['sender_port'] ." $system.$var $val\n",FILE_APPEND);
-		$cmd = $GLOBALS['zabbix']['sender_path'] ."zabbix_sender -z $this->server -p ". $GLOBALS['zabbix']['sender_port'] ." -s $this->host -k $system.$var -o $val";
+		file_put_contents($this->dat,"$this->server $this->host ". $GLOBALS['memene']['sender_port'] ." $system.$var $val\n",FILE_APPEND);
+		$cmd = $GLOBALS['memene']['sender_path'] ."zabbix_sender -z $this->server -p ". $GLOBALS['memene']['sender_port'] ." -s $this->host -k $system.$var -o $val";
 		system("$cmd 2>&1 >> ".$this->log);
 	}
-	public function elapsed($val) { 
+	public function elapsed($val) {
 		$now = microtime(true);
 		if ( !file_exists($this->utime) ) // first time
 			file_put_contents($this->utime,serialize(array( "value" => $val, "start" => $now )));
@@ -80,13 +79,13 @@ class zabbixCommon {
 		$seconds = $now-$data["start"];
 		$elapsed = (float)($val - $data["value"])/( !$seconds || $seconds==0 ? 1 : $seconds);
 		return $elapsed < 0 ? 0 : $elapsed;
-	}	
+	}
 	public function debugLog($message="") {
         $serverdate = date("d/m/Y:h:i:s");
-        $error_file = fopen($GLOBALS['zabbix']['log_file'], "a");
+        $error_file = fopen($GLOBALS['memene']['log_file'], "a");
         fputs($error_file, $serverdate . ": " .$message ."\n");
         fclose($error_file);
-	}	
+	}
 }
 
 ?>

@@ -45,9 +45,9 @@ Changelog:
 	//socket states
 	private $connected_sockets;
 	private $listening_sockets;
-  		
+
   	public function __construct() {
-  		if ($GLOBALS['zabbix']['debug_mode']) zabbixCommon::debugLog(get_class($this));
+  		if ($GLOBALS['memene']['debug_mode']) zabbixCommon::debugLog(get_class($this));
   		$this->setPHPGlobals();
   		$this->zabbix_config();
   		$this->getInputValues();
@@ -84,7 +84,7 @@ Changelog:
 	private function setPHPGlobals() {
 		error_reporting(E_ALL|E_STRICT);
 		$this->time_zone = $GLOBALS['mysql_general']['tz'];
-		date_default_timezone_set($this->time_zone);	
+		date_default_timezone_set($this->time_zone);
 	}
 	private function getInputValues() {
 		global $argv;
@@ -98,7 +98,7 @@ Changelog:
 	}
 	private function setupVariables() {
 		$this->physical_memory = (int)`free -b | grep Mem | awk '{print \$2}'`;
-		$this->swap_memory = (int)`free -b | grep Swap | awk '{print \$2}'`;	
+		$this->swap_memory = (int)`free -b | grep Swap | awk '{print \$2}'`;
 		//network states
 		$this->wait_connections = (int)`netstat -nal | grep ":3306" | grep -c "TIME_WAIT"`;
 		$this->active_connections = (int)`netstat -nal | grep ":3306" | grep -c "ESTABLISHED"`;
@@ -106,7 +106,7 @@ Changelog:
 		//socket states
 		$this->connected_sockets = (int)`netstat -nal | grep "mysql.sock" | grep -c "CONNECTED"`;
 		$this->listening_sockets = (int)`netstat -nal | grep "mysql.sock" | grep -c "LISTENING"`;
-		
+
 		// Is this a 64bit machine?
 		$this->bit64 = ereg("/64/",`uname -m`);
 			// These are dangerous privileges
@@ -124,81 +124,81 @@ Changelog:
 											"Lock_tables_priv"=>"Lock_tables_priv_count",
 											);
 		$this->statusVariables = array(
-							"Aborted_clients", 
-							"Aborted_connects", 
-							"Binlog_cache_disk_use", 
-							"Binlog_cache_use", 
-							"Bytes_received", 
-							"Bytes_sent", 
-							"Com_alter_db", 
-							"Com_alter_table", 
-							"Com_create_db", 
-							"Com_create_function", 
-							"Com_create_index", 
-							"Com_create_table", 
-							"Com_delete", 
-							"Com_drop_db", 
-							"Com_drop_function", 
-							"Com_drop_index", 
-							"Com_drop_table", 
-							"Com_drop_user", 
-							"Com_grant", 
-							"Com_insert", 
-							"Com_replace", 
-							"Com_revoke", 
-							"Com_revoke_all", 
-							"Com_select", 
-							"Com_update", 
-							"Connections", 
-							"Created_tmp_disk_tables", 
-							"Created_tmp_tables", 
-							"Handler_read_first", 
-							"Handler_read_key", 
-							"Handler_read_next", 
-							"Handler_read_prev", 
-							"Handler_read_rnd", 
-							"Handler_read_rnd_next", 
-							"Innodb_buffer_pool_read_requests", 
-							"Innodb_buffer_pool_reads", 
-							"Innodb_buffer_pool_wait_free", 
-							"Innodb_buffer_pool_write_requests", 
-							"Innodb_log_waits", 
-							"Innodb_log_writes", 
-							"Key_blocks_unused", 
-							"Key_read_requests", 
-							"Key_reads", 
-							"Key_write_requests", 
-							"Key_writes", 
-							"Max_used_connections", 
-							"Open_files", 
-							"Open_tables", 
-							"Opened_tables", 
-							"Qcache_free_blocks", 
-							"Qcache_free_memory", 
-							"Qcache_hits", 
-							"Qcache_inserts", 
-							"Qcache_lowmem_prunes", 
-							"Qcache_not_cached", 
-							"Qcache_queries_in_cache", 
-							"Qcache_total_blocks", 
-							"Questions", 
-							"Select_full_join", 
-							"Select_range", 
-							"Select_range_check", 
-							"Select_scan", 
-							"Slave_running", 
-							"Slow_launch_threads", 
-							"Slow_queries", 
-							"Sort_merge_passes", 
-							"Sort_range", 
-							"Sort_rows", 
-							"Sort_scan", 
-							"Table_locks_immediate", 
-							"Table_locks_waited", 
-							"Threads_cached", 
-							"Threads_connected", 
-							"Threads_created", 
-							"Threads_running", 
+							"Aborted_clients",
+							"Aborted_connects",
+							"Binlog_cache_disk_use",
+							"Binlog_cache_use",
+							"Bytes_received",
+							"Bytes_sent",
+							"Com_alter_db",
+							"Com_alter_table",
+							"Com_create_db",
+							"Com_create_function",
+							"Com_create_index",
+							"Com_create_table",
+							"Com_delete",
+							"Com_drop_db",
+							"Com_drop_function",
+							"Com_drop_index",
+							"Com_drop_table",
+							"Com_drop_user",
+							"Com_grant",
+							"Com_insert",
+							"Com_replace",
+							"Com_revoke",
+							"Com_revoke_all",
+							"Com_select",
+							"Com_update",
+							"Connections",
+							"Created_tmp_disk_tables",
+							"Created_tmp_tables",
+							"Handler_read_first",
+							"Handler_read_key",
+							"Handler_read_next",
+							"Handler_read_prev",
+							"Handler_read_rnd",
+							"Handler_read_rnd_next",
+							"Innodb_buffer_pool_read_requests",
+							"Innodb_buffer_pool_reads",
+							"Innodb_buffer_pool_wait_free",
+							"Innodb_buffer_pool_write_requests",
+							"Innodb_log_waits",
+							"Innodb_log_writes",
+							"Key_blocks_unused",
+							"Key_read_requests",
+							"Key_reads",
+							"Key_write_requests",
+							"Key_writes",
+							"Max_used_connections",
+							"Open_files",
+							"Open_tables",
+							"Opened_tables",
+							"Qcache_free_blocks",
+							"Qcache_free_memory",
+							"Qcache_hits",
+							"Qcache_inserts",
+							"Qcache_lowmem_prunes",
+							"Qcache_not_cached",
+							"Qcache_queries_in_cache",
+							"Qcache_total_blocks",
+							"Questions",
+							"Select_full_join",
+							"Select_range",
+							"Select_range_check",
+							"Select_scan",
+							"Slave_running",
+							"Slow_launch_threads",
+							"Slow_queries",
+							"Sort_merge_passes",
+							"Sort_range",
+							"Sort_rows",
+							"Sort_scan",
+							"Table_locks_immediate",
+							"Table_locks_waited",
+							"Threads_cached",
+							"Threads_connected",
+							"Threads_created",
+							"Threads_running",
 							"Uptime"
 							);
 	}
@@ -213,52 +213,52 @@ Changelog:
 		//if bin log is not set - there is no data! - bin_log
 		//sync to disk as well - sync_binlog
 		if (!array_key_exists("log_bin",$temp)) {
-			$this->data[] = array("log_bin"=>0);	
-			$this->data[] = array("sync_binlog"=>0);	
+			$this->data[] = array("log_bin"=>0);
+			$this->data[] = array("sync_binlog"=>0);
 		}
 		//innodb_flush_log_at_trx_commit
 		if (!array_key_exists("innodb_flush_log_at_trx_commit",$temp)) {
-			$this->data[] = array("innodb_flush_log_at_trx_commit"=>0);	
+			$this->data[] = array("innodb_flush_log_at_trx_commit"=>0);
 		}
 		//local_infile
 		if (!array_key_exists("local_infile",$temp)) {
-			$this->data[] = array("local_infile"=>0);	
+			$this->data[] = array("local_infile"=>0);
 		}
 		//expire_logs_days
 		if (!array_key_exists("expire_logs_days",$temp)) {
-			$this->data[] = array("expire_logs_days"=>0);	
+			$this->data[] = array("expire_logs_days"=>0);
 		}
 		//log_slow_queries
 		if (!array_key_exists("log_slow_queries",$temp)) {
-			$this->data[] = array("log_slow_queries"=>0);	
+			$this->data[] = array("log_slow_queries"=>0);
 		}
 		//long_query_time
 		if (!array_key_exists("long_query_time",$temp)) {
-			$this->data[] = array("long_query_time"=>0);	
+			$this->data[] = array("long_query_time"=>0);
 		}
 		//myisam_recover_options
 		if (!array_key_exists("myisam_recover_options",$temp)) {
-			$this->data[] = array("myisam_recover_options"=>0);	
+			$this->data[] = array("myisam_recover_options"=>0);
 		}
 		//sql_mode
 		if (!array_key_exists("sql_mode",$temp)) {
-			$this->data[] = array("sql_mode"=>0);	
+			$this->data[] = array("sql_mode"=>0);
 		}
 		//have_query_cache
 		if (!array_key_exists("have_query_cache",$temp)) {
-			$this->data[] = array("have_query_cache"=>0);	
+			$this->data[] = array("have_query_cache"=>0);
 		}
 		//have_symlink
 		if (!array_key_exists("have_symlink",$temp)) {
-			$this->data[] = array("have_symlink"=>0);	
+			$this->data[] = array("have_symlink"=>0);
 		}
 		//skip_show_database
 		if (!array_key_exists("skip_show_database",$temp)) {
-			$this->data[] = array("skip_show_database"=>1);	
+			$this->data[] = array("skip_show_database"=>1);
 		}
 		//old_passwords
 		if (!array_key_exists("old_passwords",$temp)) {
-			$this->data[] = array("old_passwords"=>0);	
+			$this->data[] = array("old_passwords"=>0);
 		}
 	}
 	private function gatherLocalAliases() {
@@ -285,8 +285,8 @@ Changelog:
 	}
 	private function getMysqlVersion() {
 		$parts = explode(" ",`mysql --version`);
-		$this->mysql_version = substr($parts[5],0,strlen($parts[4])-1);	
-		
+		$this->mysql_version = substr($parts[5],0,strlen($parts[4])-1);
+
 	}
 	private function mysqlEngines() {
 		$result = mysql_query("show global variables;");
@@ -298,7 +298,7 @@ Changelog:
 				if ( substr($var,0,5) == "have_" && $val == "YES" ) {
 					$this->engines[$var] = $val;
 				}
-			}	
+			}
 		}
 	}
 	private function slowInnodbGlobals() {
@@ -331,7 +331,7 @@ Changelog:
 			}
 			unlink($this->dtime);
 		}
-		file_put_contents($this->dtime,"Ran at ".date("Y-m-d H:i")."\n");	
+		file_put_contents($this->dtime,"Ran at ".date("Y-m-d H:i")."\n");
 	}
 	private function analyseUsers() {
 		// Now, load users and let's see what's there
@@ -346,7 +346,7 @@ Changelog:
 			if ( $row['Host'] == "" || $row['Host']=='%' ) {
 				$this->user_data['accounts_with_broad_host_specifier']++;
 			}
-			//root accounts	
+			//root accounts
 			if ( $row["User"] == "root" ){
 				$this->user_data['accounts_root']++;
 				$invalid = false;
@@ -379,16 +379,16 @@ Changelog:
 					}
 				}
 			}
-		}	
+		}
 	}
 	private function fragmentedTables() {
 		// How many fragmented tables to we have?
-		$result = mysql_query("SELECT 
-									COUNT(TABLE_NAME) as Frag 
-		                       FROM 
-		                       		information_schema.TABLES 
-		                       WHERE 
-		                       		TABLE_SCHEMA NOT IN ('information_schema','mysql') 
+		$result = mysql_query("SELECT
+									COUNT(TABLE_NAME) as Frag
+		                       FROM
+		                       		information_schema.TABLES
+		                       WHERE
+		                       		TABLE_SCHEMA NOT IN ('information_schema','mysql')
 		                       		AND Data_free > ".$this->fragmentation_data_free_threshold);
 		//@todo this is stupid there is no real need for a while loop here
 		while ($row = mysql_fetch_assoc($result)) {
@@ -412,7 +412,7 @@ Changelog:
 			} elseif ( $this->engines['have_myisam'] == "USED" && $this->engines['have_innodb'] == "YES" ) {
 				$this->install_type = "myisam";
 			} elseif ( $this->engines['have_myisam'] == "USED" && $this->engines['have_innodb'] == "YES" && $this->engines['have_myisam'] == "YES" && $this->engines['have_innodb'] == "USED") {
-				$this->install_type = "mixed";	
+				$this->install_type = "mixed";
 			} else {
 				$this->install_type = "unknown";
 			}
@@ -477,7 +477,7 @@ Changelog:
 		} else {
 			$Uptimestring = "${seconds}s";
 		}
-		$this->data[] = array('Uptimestring' => $Uptimestring);	
+		$this->data[] = array('Uptimestring' => $Uptimestring);
 		return $days;
 	}
 	private function liveData() {
@@ -536,7 +536,7 @@ Changelog:
 		} else {
 			$this->data[] = array('Percent_query_cache_pruned_from_inserts' => 0);
 		}
-		
+
 		//hmmm for some reason this was not set in my version - key_buffer_size
 		if (isset($this->mysql_globals['key_buffer_size'])) {
 			$this->data[] = array('Percent_myisam_key_cache_in_use' => $this->percent( (1 - ($this->mysql_globals['Key_blocks_unused'] / ($this->mysql_globals['key_buffer_size'] / $this->mysql_globals['key_cache_block_size']))) ));
@@ -581,7 +581,7 @@ Changelog:
 			$this->data[] = array('Innodb_log_file_size_total' => 0);
 		}
 		$this->data[] = array('Percent_innodb_log_write_waits_required' => $this->percent( $this->mysql_globals['Innodb_log_waits'] / $this->mysql_globals['Innodb_log_writes'] ));
-		
+
 		$this->data[] = array('Slave_running' => $this->mysql_globals['Slave_IO_Running']="Yes" && $this->mysql_globals['Slave_SQL_Running']="Yes" ? 1 : 0);
 	}
 	private function postToZabbix() {
@@ -589,11 +589,11 @@ Changelog:
 			foreach ($var as $subkey=>$subval) {
 				if ($GLOBALS['zabbix']['debug_mode']) zabbixCommon::debugLog("mysql_general: $subkey | $subval");
 				$this->zabbix_post('mysql_general',$subkey,$subval);
-			}			
+			}
 		}
 		//echo 1;
-		//exit(0);	
-	}	
+		//exit(0);
+	}
  }
 
 

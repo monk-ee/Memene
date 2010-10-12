@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <zabbix_export version="1.0" date="01.08.10" time="01.12">
 	<hosts>
-		<host name="OurDelta_OpenVZ_1.7">
+		<host name="Memene_OpenVZ_v1">
 			<useip>0</useip>
 			<dns></dns>
 			<ip></ip>

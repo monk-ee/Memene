@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <zabbix_export version="1.0" date="01.04.10" time="01.12">
 	<hosts>
-		<host name="OurDelta_MySQL_General_1.7">
+		<host name="Memene_MySQL_General_1">
 			<useip>0</useip>
 			<dns></dns>
 			<ip></ip>
@@ -4723,7 +4723,7 @@
 				<trigger>
 					<description>MySQL: Root remote login enabled on {HOSTNAME}</description>
 					<type>0</type>
-					<expression>{{HOSTNAME}:mysql_general.root_remote_accesss.last(0)}=1</expression>
+					<expression>{{HOSTNAME}:mysql_general.root_remote_access.last(0)}=1</expression>
 					<url></url>
 					<status>0</status>
 					<priority>3</priority>

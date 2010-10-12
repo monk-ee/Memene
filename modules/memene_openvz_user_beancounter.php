@@ -1,9 +1,9 @@
 <?php
 /**
- * @desc openvzuser bean counter 
+ * @desc openvzuser bean counter
  * @author monkee
- * 
- * 
+ *
+ *
  * Changelog: Version 0.1:   16:40 20109816 first bash at this script
  *        uid  resource                     held              maxheld              barrier                limit              failcnt
       116:  kmemsize                  5486754              7904792             14372700             14790164                    0
@@ -29,7 +29,7 @@
             dummy                           0                    0                    0                    0                    0
             dummy                           0                    0                    0                    0                    0
             dummy                           0                    0                    0                    0                    0
-            numiptent                      10                   10                  128                  128                    0         
+            numiptent                      10                   10                  128                  128                    0
  */
 
 class openvz_user_beancounter extends zabbixCommon {
@@ -37,8 +37,8 @@ class openvz_user_beancounter extends zabbixCommon {
 	private $_stats_array;
 	private $_data = array();
 
- 	public function __construct() {  
-        if ($GLOBALS['zabbix']['debug_mode']) zabbixCommon::debugLog(get_class($this)); 
+ 	public function __construct() {
+        if ($GLOBALS['memene']['debug_mode']) zabbixCommon::debugLog(get_class($this));
         $this->setPHPGlobals();
         $this->zabbix_config();
  	    $this->getBeanFile();
@@ -49,17 +49,17 @@ class openvz_user_beancounter extends zabbixCommon {
     private function setPHPGlobals() {
         error_reporting(E_ALL|E_STRICT);
         $this->time_zone = $GLOBALS['mysql_general']['tz'];
-        date_default_timezone_set($this->time_zone);    
+        date_default_timezone_set($this->time_zone);
     }
 	private function getBeanFile() {
 		$this->_bean_file = @file_get_contents($GLOBALS['openvz_user_beancounter']['file']);
 	}
 	private function explodeData() {
         $this->_bean_file = preg_replace('/\s+/','|',$this->_bean_file);
-	 	$this->_stats_array = explode("|",$this->_bean_file);	    
+	 	$this->_stats_array = explode("|",$this->_bean_file);
 	}
 	private function logData() {
-        //resource                     held              maxheld              barrier                limit              failcnt  
+        //resource                     held              maxheld              barrier                limit              failcnt
 		//kmemsize  10
         //Size of unswappable memory in bytes, allocated by the operating system kernel.
         $this->data[] = array("kmemsize_held"=>$this->_stats_array[11]);
@@ -197,7 +197,7 @@ class openvz_user_beancounter extends zabbixCommon {
         //dummy
         //dummy
         //dummy
-        //numiptent 148 
+        //numiptent 148
         //The number of NETFILTER (IP packet filtering) entries.   Also, large numiptent cause considerable slowdown of processing of network packets. It is not recommended to allow containers to create more than 200?300 numiptent.
         $this->data[] = array("numiptent_held"=>$this->_stats_array[149]);
         $this->data[] = array("numiptent_maxheld"=>$this->_stats_array[150]);
@@ -210,11 +210,11 @@ class openvz_user_beancounter extends zabbixCommon {
 			foreach ($var as $subkey=>$subval) {
 				//echo "$subkey | $subval \r\n";
 				$this->zabbix_post('openvz',$subkey,$subval);
-			}			
+			}
 		}
 		echo 1;
-		exit(0);	
-	}		
+		exit(0);
+	}
 }
 
 ?>
