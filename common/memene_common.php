@@ -5,9 +5,9 @@ class zabbixCommon {
 	protected $zabbix_config;
 	protected $host;
 	protected $server;
-	protected $dat = $GLOBALS['memene']['config_directory']."zabbix.dat";
-	protected $utime = $GLOBALS['memene']['config_directory']."zabbix.utime";
-	protected $dtime = $GLOBALS['memene']['config_directory']."zabbix.dtime";
+	protected $dat;
+	protected $utime;
+	protected $dtime;
 
 	public function close($a,$b) {
 		if ( $a == 0 && $b > 1 ) return 0;

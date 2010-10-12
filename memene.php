@@ -12,6 +12,9 @@ class zabbixMonitor {
 
 	public function __construct() {
 		if ($GLOBALS['memene']['debug_mode']) zabbixCommon::debugLog(get_class($this));
+		$this->dat = $GLOBALS['memene']['config_directory']."zabbix.dat";
+		$this->utime = $GLOBALS['memene']['config_directory']."zabbix.utime";
+		$this->dtime = $GLOBALS['memene']['config_directory']."zabbix.dtime";
 		$this->includeModuleFiles();
 		$this->initializeModuleClasses();
 		$this->versionCheck();
