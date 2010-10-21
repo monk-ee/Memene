@@ -111,7 +111,7 @@ Changelog:
 		$this->listening_sockets = (int)`netstat -nal | grep "mysql.sock" | grep -c "LISTENING"`;
 
 		// Is this a 64bit machine?
-		$this->bit64 = ereg("/64/",`uname -m`);
+		$this->bit64 = preg_match("/64/",`uname -m`);
 			// These are dangerous privileges
 		$this->dangerous_privileges = array(
 											"Insert_priv"=>"Insert_priv_count",
