@@ -32,7 +32,7 @@
 	private $slave_errors = false;
 
   	public function __construct() {
-  		if ($GLOBALS['zabbix']['debug_mode']) zabbixCommon::debugLog(get_class($this));
+  		if ($GLOBALS['memene']['debug_mode']) zabbixCommon::debugLog(get_class($this));
   		$this->dat = $GLOBALS['memene']['config_directory']."zabbix.dat";
 		$this->utime = $GLOBALS['memene']['config_directory']."zabbix.utime";
 		$this->dtime = $GLOBALS['memene']['config_directory']."zabbix.dtime";
