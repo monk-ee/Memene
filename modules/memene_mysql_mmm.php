@@ -2,11 +2,11 @@
 /**
 * a bit of a reworking of the original mmm monitor script
 * there have been no improvements just a a faithful reproduction of the original script
-* 
+*
 *  You will need to allow the zabbix user access to read the files in the /etc/mysql-mmm directory
 *  Something like chgrp zabbix *
 *  then set permissions chmod 640 *
-* 
+*
 *  You will need to make sure zabbix user has access to read pid agent/monitor file
 *  This varies from package to package OS to OS
 *  eg /var/run/mysql-mmm
@@ -26,11 +26,14 @@ class mysql_mmm extends zabbixCommon {
 	private $pid_path_agent;
 	private $agent_running;
 	private $monitor_running;
-	
+
 	public function __construct() {
 		if ($GLOBALS['zabbix']['debug_mode']) zabbixCommon::debugLog(get_class($this));
+		$this->dat = $GLOBALS['memene']['config_directory']."zabbix.dat";
+		$this->utime = $GLOBALS['memene']['config_directory']."zabbix.utime";
+		$this->dtime = $GLOBALS['memene']['config_directory']."zabbix.dtime";
 		$this->setPHPGlobals();
-		$this->zabbix_config();	
+		$this->zabbix_config();
 		$this->lookForAgent();
 		$this->lookForMonitor();
 		$this->determineMonitorType();
@@ -46,7 +49,7 @@ class mysql_mmm extends zabbixCommon {
 				$this->gatherMonitorData();
 				break;
 			default:
-				throw new Exception("Could not determine daemon type, kaboom!");	
+				throw new Exception("Could not determine daemon type, kaboom!");
 		}
 		$this->postToZabbix();
 	}
@@ -58,10 +61,10 @@ class mysql_mmm extends zabbixCommon {
 			foreach ($var as $subkey=>$subval) {
 				if ($GLOBALS['zabbix']['debug_mode']) zabbixCommon::debugLog("mysql_mmm: $subkey | $subval");
 				$this->zabbix_post('mysql_mmm',$subkey,$subval);
-			}			
+			}
 		}
 		echo 1;
-		exit(0);	
+		exit(0);
 	}
 	private function lookForAgent() {
 		// check
@@ -69,10 +72,10 @@ class mysql_mmm extends zabbixCommon {
         	$this->mmm_agent_config = false;
         	$this->agent_running = false;
         	return;
-		} 
+		}
 		$this->mmm_agent_config = file_get_contents($GLOBALS['mysql_mmm']['agent_config']);
         preg_match("/\s*include\s*(\S*)/i",$this->mmm_agent_config,$parts);
-        $this->included_config = $GLOBALS['mysql_mmm']['config_path'] . $parts[1];	
+        $this->included_config = $GLOBALS['mysql_mmm']['config_path'] . $parts[1];
 		//check again
 		if (!file_exists($this->included_config)) {
 			throw new Exception("Could not locate included configuration on filesystem.");
@@ -87,7 +90,7 @@ class mysql_mmm extends zabbixCommon {
 			$this->monitor_running = false;
 			$this->mmm_monitor_config = false;
 		}
-	}			
+	}
 	private function determineMonitorType() {
 		if (!$this->mmm_agent_config && !$this->mmm_monitor_config) {
 			throw new Exception("Neither monitor or agent configs can be found, please check configuration!");
@@ -111,7 +114,7 @@ class mysql_mmm extends zabbixCommon {
 		preg_match("/\s*pid_path\s*(\S*)/i",$this->mmm_agent_config,$parts);
 		$this->pid_path_agent = $parts[1];
 		if (!$this->pid_path_agent) {
-			// i suppose this is an error	
+			// i suppose this is an error
 			$this->agent_running = false;
 			return;
 		}
@@ -131,14 +134,14 @@ class mysql_mmm extends zabbixCommon {
 		preg_match("/\s*pid_path\s*(\S*)/i",$this->mmm_monitor_config,$parts);
 		$this->pid_path_monitor = $parts[1];
 		if (!$this->pid_path_monitor) {
-			// i suppose this is an error	
+			// i suppose this is an error
 			$this->monitor_running = false;
-			return;	
+			return;
 		}
 		// check that that file exists, get it's contents and check that the pid is running
 		if (!file_exists($this->pid_path_monitor)) {
 			$this->monitor_running = false;
-			return; 
+			return;
 		}
 		$pid = file_get_contents($this->pid_path_monitor);
 		if (!$pid || !$this->processRunning($pid)) {
@@ -157,21 +160,21 @@ class mysql_mmm extends zabbixCommon {
 	 }
 	 private function gatherAgentData() {
 	 	 $agent_running = (int)($this->agent_running);
-	 	 $this->data[] = array("agent_running"=>$agent_running);	
+	 	 $this->data[] = array("agent_running"=>$agent_running);
 	 }
 	 private function gatherMonitorData() {
 	 	// get the cluster mode (active or passive)
-		$mmm_status = exec('/usr/sbin/mmm_control mode');	
+		$mmm_status = exec('/usr/sbin/mmm_control mode');
 		$cluster_active = (int)($mmm_status == "ACTIVE");
-		$this->data[] = array("cluster_active"=>$cluster_active);	
+		$this->data[] = array("cluster_active"=>$cluster_active);
 	 	//monitor
 	 	$monitor_running = (int)($this->monitor_running);
-	 	$this->data[] = array("monitor_running"=>$monitor_running);	
+	 	$this->data[] = array("monitor_running"=>$monitor_running);
 	 }
 	 private function fakeMonitorData() {
 	 	 //rationale here is that values shouldnt just disappear
-		$this->data[] = array("cluster_active"=>0);	
-	 	$this->data[] = array("monitor_running"=>0);	
+		$this->data[] = array("cluster_active"=>0);
+	 	$this->data[] = array("monitor_running"=>0);
 	 }
 }
 

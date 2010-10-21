@@ -30,23 +30,26 @@
 	private $err_no =  0;
 	private $err_msg = '';
 	private $slave_errors = false;
-		
+
   	public function __construct() {
   		if ($GLOBALS['zabbix']['debug_mode']) zabbixCommon::debugLog(get_class($this));
+  		$this->dat = $GLOBALS['memene']['config_directory']."zabbix.dat";
+		$this->utime = $GLOBALS['memene']['config_directory']."zabbix.utime";
+		$this->dtime = $GLOBALS['memene']['config_directory']."zabbix.dtime";
   		$this->setPHPGlobals();
   		$this->zabbix_config();
   		$this->getInputValues();
   		$this->connectMysql();
   		if ($this->checkBinaryLogsEnabled()) {
-  			$this->determineReplicationRole();	
+  			$this->determineReplicationRole();
 		}
   		switch($this->replication_role) {
   			case "NONE":
   				//do nothing we have nothing to check
-  				break;	
+  				break;
   			case "MASTER":
   				//i guess all we can check is whether we have slaves connected
-  				$this->checkSlaveHosts(); 
+  				$this->checkSlaveHosts();
   				$this->masterBinlogPosition();
   				break;
   			case "SLAVE":
@@ -98,7 +101,7 @@
 		//Waiting for the slave SQL thread to free enough relay log space -(BAD) You are using a nonzero relay_log_space_limit value, and the relay logs have grown large enough that their combined size exceeds this value. The I/O thread is waiting until the SQL thread frees enough space by processing relay log contents so that it can delete some relay log files.
 		//Waiting for slave mutex on exit -(BAD) A state that occurs briefly as the thread is stopping.
 		$this->slave_io_state_msg = $this->slave_status['Slave_IO_State'];
-		
+
 		switch ($this->slave_io_state_msg) {
 			case "Waiting for master to send event":
 			case "Waiting for master update":
@@ -121,7 +124,7 @@
 			default:
 				$this->slave_io_state = false; //really this should be do nothing the value is already false
 		}
-		
+
 	}
 	private function masterBinlogPosition() {
 		$this->master_binlog_position = $this->master_status['Position'];
@@ -131,7 +134,7 @@
 				$this->slave_io_running = true;
 		}
 		$this->slave_io_running = false;
-		
+
 	}
 	private function slaveSQLRunning() {
 		if ($this->slave_status['Slave_SQL_Running'] == "Yes") {
@@ -156,12 +159,12 @@
 	}
 	private function slaveErrors() {
 		//Last_Errno: 0
-	    //Last_Error: 
-	    //just check if these are blank and o 
+	    //Last_Error:
+	    //just check if these are blank and o
 	    $this->err_no = $this->slave_status['Last_Errno'];
 	    $this->err_msg = $this->slave_status['Last_Error'];
 	    if ($this->err_no == 0 && $this->err_msg == '') {
-	    	$this->slave_errors = false;	
+	    	$this->slave_errors = false;
 		}
 		$this->slave_errors = true;
 	}
@@ -172,7 +175,7 @@
 		+-----------+-------+------+-------------------+-----------+
 		| Server_id | Host  | Port | Rpl_recovery_rank | Master_id |
 		+-----------+-------+------+-------------------+-----------+
-		|      1020 | bitey | 3306 |                 0 |       110 | 
+		|      1020 | bitey | 3306 |                 0 |       110 |
 		+-----------+-------+------+-------------------+-----------+
 		*/
 		$result = mysql_query("show slave hosts;");
@@ -207,11 +210,11 @@
 			if ($row['Value'] == "ON") {
 				return true;
 			} else {
-				$this->replication_role = "NONE";	
+				$this->replication_role = "NONE";
 				return false;
 			}
 		} else {
-			$this->replication_role = "NONE";	
+			$this->replication_role = "NONE";
 			return false;
 		}
 	}
@@ -233,29 +236,29 @@
 			return;
 		}
 		if (!$slave && $master) {
-			$this->replication_role = "MASTER";	
+			$this->replication_role = "MASTER";
 			$this->master_enabled = true;
 			$this->replication_status = true;
 			return;
 		}
 		$this->replication_role = "UNKNOWN";
 	}
-	
+
 	private function gatherMasterStatus() {
 		/*
 		mysql> show master status;
 		+---------------+----------+--------------+------------------+
 		| File          | Position | Binlog_Do_DB | Binlog_Ignore_DB |
 		+---------------+----------+--------------+------------------+
-		| binlog.004227 |  6969597 |              |                  | 
+		| binlog.004227 |  6969597 |              |                  |
 		+---------------+----------+--------------+------------------+
 		*/
 		$result = mysql_query("show master status;");
 		if ( $result ) {
-			$this->master_status = mysql_fetch_assoc($result);	
+			$this->master_status = mysql_fetch_assoc($result);
 			if(!$this->master_status) {
 				return false;
-			}				
+			}
 			return true;
 		}
 		return false;
@@ -276,34 +279,34 @@
 	      Relay_Master_Log_File: binlog.004227
 	           Slave_IO_Running: Yes
 	          Slave_SQL_Running: Yes
-	            Replicate_Do_DB: 
-	        Replicate_Ignore_DB: 
-	         Replicate_Do_Table: 
-	     Replicate_Ignore_Table: 
-	    Replicate_Wild_Do_Table: 
-	Replicate_Wild_Ignore_Table: 
+	            Replicate_Do_DB:
+	        Replicate_Ignore_DB:
+	         Replicate_Do_Table:
+	     Replicate_Ignore_Table:
+	    Replicate_Wild_Do_Table:
+	Replicate_Wild_Ignore_Table:
 	                 Last_Errno: 0
-	                 Last_Error: 
+	                 Last_Error:
 	               Skip_Counter: 0
 	        Exec_Master_Log_Pos: 10104747
 	            Relay_Log_Space: 114962616
 	            Until_Condition: None
-	             Until_Log_File: 
+	             Until_Log_File:
 	              Until_Log_Pos: 0
 	         Master_SSL_Allowed: No
-	         Master_SSL_CA_File: 
-	         Master_SSL_CA_Path: 
-	            Master_SSL_Cert: 
-	          Master_SSL_Cipher: 
-	             Master_SSL_Key: 
+	         Master_SSL_CA_File:
+	         Master_SSL_CA_Path:
+	            Master_SSL_Cert:
+	          Master_SSL_Cipher:
+	             Master_SSL_Key:
 	      Seconds_Behind_Master: 0
       */
       $result = mysql_query("show slave status;");
 		if ( $result ) {
-			$this->slave_status = mysql_fetch_assoc($result);	
+			$this->slave_status = mysql_fetch_assoc($result);
 			if(!$this->slave_status) {
 				return false;
-			}		
+			}
 			return true;
 		}
 		return false;
@@ -311,7 +314,7 @@
 	private function setPHPGlobals() {
 		error_reporting(E_ALL|E_STRICT);
 		$this->time_zone = $GLOBALS['mysql_general']['tz'];
-		date_default_timezone_set($this->time_zone);	
+		date_default_timezone_set($this->time_zone);
 	}
 	private function getInputValues() {
 		$this->user = $GLOBALS['mysql_general']['monitor_mysql_user'];
@@ -330,11 +333,11 @@
 			foreach ($var as $subkey=>$subval) {
 				if ($GLOBALS['zabbix']['debug_mode']) zabbixCommon::debugLog("mysql_replication: $subkey | $subval");
 				$this->zabbix_post('mysql_replication',$subkey,$subval);
-			}			
+			}
 		}
 		//echo 1;
-		//exit(0);	
-	}	
+		//exit(0);
+	}
  }
 
 
