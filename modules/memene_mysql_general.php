@@ -590,7 +590,7 @@ Changelog:
 	private function postToZabbix() {
 		foreach ( $this->data as $key => $var ) {
 			foreach ($var as $subkey=>$subval) {
-				if ($GLOBALS['zabbix']['debug_mode']) zabbixCommon::debugLog("mysql_general: $subkey | $subval");
+				if ($GLOBALS['memene']['debug_mode']) zabbixCommon::debugLog("mysql_general: $subkey | $subval");
 				$this->zabbix_post('mysql_general',$subkey,$subval);
 			}
 		}
@@ -598,7 +598,3 @@ Changelog:
 		//exit(0);
 	}
  }
-
-
-
-

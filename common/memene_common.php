@@ -69,7 +69,7 @@ class zabbixCommon {
 		}
 		file_put_contents($this->dat,"$this->server $this->host ". $GLOBALS['memene']['sender_port'] ." $system.$var $val\n",FILE_APPEND);
 		$cmd = $GLOBALS['memene']['sender_path'] ."zabbix_sender -z $this->server -p ". $GLOBALS['memene']['sender_port'] ." -s $this->host -k $system.$var -o $val";
-		system("$cmd 2>&1 >> ".$this->log);
+		system("$cmd 2>&1 >> ".$GLOBALS['memene']['log_file']);
 	}
 	public function elapsed($val) {
 		$now = microtime(true);
