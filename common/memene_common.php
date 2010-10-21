@@ -6,6 +6,7 @@ class zabbixCommon {
 	protected $host;
 	protected $server;
 	protected $dat;
+	protected $log;
 	protected $utime;
 	protected $dtime;
 
