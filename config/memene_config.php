@@ -25,6 +25,7 @@ $GLOBALS['modules'][] = "mysql_mmm";
 //$GLOBALS['modules'][] = "openvz_user_beancounter";
 //$GLOBALS['modules'][] = "apache_status";
 //$GLOBALS['modules'][] = "nginx_status";
+$GLOBALS['modules'][] = "postfix_mailq"; 
 
 
 /**
