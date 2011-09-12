@@ -14,25 +14,26 @@
 
 class postfix_mailq extends zabbixCommon {
 	private $_exec_response;
-	private $_stats_array;
     private $_queues = array("incoming","active","deferred","hold");
 	private $_data = array();
 
  	public function __construct() {  
+        $this->dat = $GLOBALS['memene']['config_directory']."zabbix.dat"; 
+        $this->zabbix_config(); 
  	    $this->execStats();
  	    $this->postToZabbix();
 	}
 	public function execStats(){
         foreach($this->_queues as $queue) {
-            exec("qshape " . $queue . " | grep TOTAL | awk '{print \$2}'",$response,$return);
+            exec("sudo /usr/sbin/qshape " . $queue . " | grep TOTAL | awk '{print \$2}'",$this->_exec_response,$return);
                     $this->_data[] = array($queue=>$return); 
         }
 	}
 	private function postToZabbix() {
 		foreach ( $this->_data as $key => $var ) {
 			foreach ($var as $subkey=>$subval) {
-				echo "$subkey | $subval \r\n";
-				$this->zabbix_post('nginx',$subkey,$subval);
+				//echo "$subkey | $subval \r\n";
+				$this->zabbix_post('mailq',$subkey,$subval);
 			}			
 		}
 		echo 1;
