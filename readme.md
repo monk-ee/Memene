@@ -67,8 +67,8 @@ You can set the timezone that is most relevant to you. Remember, you should have
 	$GLOBALS['mysql_general']['monitor_mysql_password'] = "";
 
 6. Add the following details to the zabbix_agentd.conf (If you are using the Daemon)
-	UserParameter=zabbix_monitor.daily,php /etc/zabbix/zabbix-monitor.php daily
-	UserParameter=zabbix_monitor.live,php /etc/zabbix/zabbix-monitor.php live
+	UserParameter=memene.daily,php /etc/zabbix/zabbix-monitor.php daily     //only use this with mysql scripts
+	UserParameter=memene.live,php /etc/zabbix/memene.php live
 
 7. You need to import the zabbix_monitor_controller.xml template - this is the template that triggers the user parameter checks defined in agent configuration.
 
@@ -77,4 +77,5 @@ You can set the timezone that is most relevant to you. Remember, you should have
 Note:
 You need the following packages
 PHP-CLI
-PHP-MYSQL
+PHP-MYSQL //mysql only
+PHP-CURL //nginx apache
