@@ -36,8 +36,6 @@ class postfix_mailq extends zabbixCommon {
 				$this->zabbix_post('mailq',$subkey,$subval);
 			}			
 		}
-		echo 1;
-		exit(0);	
 	}		
 }
 

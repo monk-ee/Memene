@@ -26,7 +26,7 @@ class dbmail extends zabbixCommon {
         public function execStats(){
         foreach($this->_ports as $portkey=>$port) {
                 $exec_response = 0;
-            exec("sudo /usr/bin/lsof -i :" . $port . " | grep -c TCP",$exec_response,$return);
+            exec("sudo /usr/bin/lsof -i :" . $port . " | /bin/grep -c TCP",$exec_response,$return);
             $this->_data[] = array($portkey=>$exec_response[0]);
         }
         }
@@ -37,8 +37,6 @@ class dbmail extends zabbixCommon {
                                 $this->zabbix_post('dbmail',$subkey,$subval);
                         }
                 }
-                //echo 1;
-                //exit(0);
         }
 }
 
