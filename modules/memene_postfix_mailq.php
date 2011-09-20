@@ -25,8 +25,9 @@ class postfix_mailq extends zabbixCommon {
 	}
 	public function execStats(){
         foreach($this->_queues as $queue) {
-            exec("sudo /usr/sbin/qshape " . $queue . " | grep TOTAL | awk '{print \$2}'",$this->_exec_response,$return);
-                    $this->_data[] = array($queue=>$return); 
+            $exec_response = 0;
+            exec("sudo /usr/sbin/qshape " . $queue . " | grep TOTAL | awk '{print \$2}'",$exec_response,$return);
+                    $this->_data[] = array($queue=>$exec_response[0]); 
         }
 	}
 	private function postToZabbix() {
