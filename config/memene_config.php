@@ -25,7 +25,7 @@ $GLOBALS['modules'][] = "mysql_mmm";
 //$GLOBALS['modules'][] = "openvz_user_beancounter";
 //$GLOBALS['modules'][] = "apache_status";
 //$GLOBALS['modules'][] = "nginx_status";
-$GLOBALS['modules'][] = "postfix_mailq"; 
+//$GLOBALS['modules'][] = "postfix_mailq"; 
 
 
 /**
@@ -52,8 +52,4 @@ $GLOBALS['mysql_mmm']['monitor_config'] = $GLOBALS['mysql_mmm']['config_path']."
 */
 //$GLOBALS['nginx_status']['host'] = "http://localhost/stub_status;
 
-/**
-* user beancounters
-*/
-$GLOBALS['openvz_user_beancounter']['file'] = $GLOBALS['memene']['config_directory']."user_beancounter.txt";
 ?>

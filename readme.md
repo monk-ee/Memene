@@ -128,6 +128,23 @@ zabbix ALL=NOPASSWD: /usr/sbin/qshape
 $GLOBALS['modules'][] = "postfix_mailq";
 </code>
 
+## INSTALL for OpenVZ Module Bean Counter
+
+There are some additional instructions for the dbmail module:
+
+* You will need to have the sudo package installed and add the following line
+
+<code>
+zabbix ALL=NOPASSWD: /bin/cat /proc/user_beancounters
+</code>
+
+* Add the following line to the Memene configuration file:
+
+<code>
+$GLOBALS['modules'][] = "openvz_user_beancounter";
+</code>
+
+
 ## TROUBLESHOOTING
 * All log files must be owned by the local Zabbix user, if you have done everything right and results arent posting this is usually where it has gone wrong.
 * You may need to touch a zabbix.dat file into the Zabbix configuration directory, ownership must be zabbix. I plan to phase this out but the MySQL module still uses the file.

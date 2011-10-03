@@ -55,7 +55,8 @@ class openvz_user_beancounter extends zabbixCommon {
         date_default_timezone_set($this->time_zone);
     }
 	private function getBeanFile() {
-		$this->_bean_file = @file_get_contents($GLOBALS['openvz_user_beancounter']['file']);
+        exec("sudo /bin/cat /proc/user_beancounters",$exec_response,$return);
+        $this->_bean_file = array($queue=>$exec_response[0]); 
 	}
 	private function explodeData() {
         $this->_bean_file = preg_replace('/\s+/','|',$this->_bean_file);
