@@ -1,22 +1,31 @@
 README
-Ok, these scripts have seen some production use and need to be streamlined a bit. Callously I am only going to test these against 1.8.3 - good luck with older versions.
+The following code forms the basis for a modular PHP zabbiz trapper framework. Most of the templates are for an avtive agent, but they can work as passive too.
 
-We migrated from launchpad to github, just coz we like githib and bitbucket took too long to join with atlassian.
+Monitoring scripts are included for:
+* DBMAIL
+* Postfix via qshape
+*
 
 INSTALL (Quick and Dirty)
 1. Install Files in the /etc/zabbix directory
 2.  Open up the config file eg. vim /etc/zabbix/config/memene_config.php
 
 3. Set the location for your zabbix_agent/zabbix_agentd. The script needs access to this file so it can zabbix post.
+<code>
 	$GLOBALS['zabbix']['config_location'] = "/etc/zabbix/zabbix_agentd.conf";
+</code>
 
 4.Enable the modules you want to use:
+<code>
  	$GLOBALS['modules'][] = "mysql_general";
  	//$GLOBALS['modules'][] = "mysql_replication";
  	//$GLOBALS['modules'][] = "mysql_mmm";
 	//$GLOBALS['modules'][] = "apache_status";
 	//$GLOBALS['modules'][] = "nginx_status";
-5. Configure each enabled module. Currently the mysql_general is the only module enabled, so fill out your mysql user details here. You should probably create your own monitor user with the relevant permissions at this point. Replication privilges should be enough. Below is a summary of the permssions you can use fro your zabbix user. Never ever ever ever use root!!!!
+</code>
+
+5. Configure each enabled module. Currently the mysql_general is the only module enabled by default, so fill out your mysql user details here. You should probably create your own monitor user with the relevant permissions at this point. Replication privilges should be enough. Below is a summary of the permssions you can use fro your zabbix user. Never ever ever ever use root!!!!
+<code>
                  Host: localhost
                  User: zabbix_mysql_mon
              Password:
@@ -60,22 +69,63 @@ Create_tmp_table_priv: N
 create user 'zabbix_mysql_mon'@'localhost' identified by '';
 GRANT REPLICATION CLIENT ON *.* TO 'zabbix_mysql_mon'@'localhost';
 GRANT SELECT ON `mysql`.* TO 'zabbix_mysql_mon'@'localhost'
+</code>
 
 You can set the timezone that is most relevant to you. Remember, you should have taught your mysql server to understand text timezones, see this article for more info http://dev.mysql.com/doc/refman/5.1/en/time-zone-support.html
+<code>
 	$GLOBALS['mysql_general']['tz'] = "America/New_York";
 	$GLOBALS['mysql_general']['monitor_mysql_user'] = "";
 	$GLOBALS['mysql_general']['monitor_mysql_password'] = "";
-
+</code>
 6. Add the following details to the zabbix_agentd.conf (If you are using the Daemon)
-	UserParameter=memene.daily,php /etc/zabbix/zabbix-monitor.php daily     //only use this with mysql scripts
-	UserParameter=memene.live,php /etc/zabbix/memene.php live
+<code>
+	UserParameter=memene.daily,php /etc/zabbix/memene.php daily     //only use this with mysql scripts
+	UserParameter=memene.live,php /etc/zabbix/memene.php live  //you usually only need this one
+</code>
 
-7. You need to import the zabbix_monitor_controller.xml template - this is the template that triggers the user parameter checks defined in agent configuration.
+7. You need to import the memene_live_controller.xml template - this is the template that triggers the user parameter checks defined in agent configuration.
 
-8. It is then a manual process to add the templates (in the templates directory of your zabbix monitor install) to the servers you want to monitor. Suppport for the Zabbix 1.8 API to do this on your behalf is being considered for a future release.
+8. It is then a manual process to add the templates (in the templates directory of your zabbix monitor install) to the servers you want to monitor. 
 
 Note:
 You need the following packages
 PHP-CLI
 PHP-MYSQL //mysql only
 PHP-CURL //nginx apache
+
+INSTALL for DBMAIL Module
+There are some additional instructions for the dbmail module:
+
+1. You will need to have the sudo package installed and add the following line
+<code>
+ zabbix ALL=NOPASSWD: /usr/bin/lsof
+</code>
+
+2. Add the following line to the Memene configuration file:
+<code>
+$GLOBALS['modules'][] = "dbmail";
+</code>
+
+INSTALL for Postfix Module
+
+There are some additional instructions for the dbmail module:
+
+1. You will need to have the sudo package installed and add the following line
+<code>
+zabbix ALL=NOPASSWD: /usr/sbin/qshape
+</code>
+
+2. Add the following line to the Memene configuration file:
+<code>
+$GLOBALS['modules'][] = "postfix_mailq";
+</code>
+
+TROUBLESHOOTING
+* All log files must be owned by the local Zabbix user, if you have done everything right and results arent posting this is usually where it has gone wrong.
+
+* You may need to touch a zabbix.dat file into the Zabbix configuration directory, ownership must be zabbix. I plan to phase this out but the MySQL module still uses the file.
+
+* If you use the dbmail and postfix modules at the same time, the sudo config should be:
+ <code>
+ zabbix ALL=NOPASSWD: /usr/bin/lsof, /usr/sbin/qshape 
+</code>
