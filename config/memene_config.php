@@ -20,8 +20,8 @@ $GLOBALS['memene']['log_file'] = $GLOBALS['memene']['log_file_directory']."memen
 * module definitions
 */
 $GLOBALS['modules'][] = "mysql_general";
-$GLOBALS['modules'][] = "mysql_replication";
-$GLOBALS['modules'][] = "mysql_mmm";
+//$GLOBALS['modules'][] = "mysql_replication";
+//$GLOBALS['modules'][] = "mysql_mmm";
 //$GLOBALS['modules'][] = "openvz_user_beancounter";
 //$GLOBALS['modules'][] = "apache_status";
 //$GLOBALS['modules'][] = "nginx_status";

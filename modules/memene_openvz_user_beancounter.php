@@ -33,7 +33,7 @@
  */
 
 class openvz_user_beancounter extends zabbixCommon {
-	private $_bean_file;
+	private $_bean_data;
 	private $_stats_array;
 	private $_data = array();
 
@@ -51,16 +51,16 @@ class openvz_user_beancounter extends zabbixCommon {
 	}
     private function setPHPGlobals() {
         error_reporting(E_ALL|E_STRICT);
-        $this->time_zone = $GLOBALS['mysql_general']['tz'];
-        date_default_timezone_set($this->time_zone);
+        //$this->time_zone = $GLOBALS['mysql_general']['tz'];
+        //date_default_timezone_set($this->time_zone);
     }
 	private function getBeanFile() {
         exec("sudo /bin/cat /proc/user_beancounters",$exec_response,$return);
-        $this->_bean_file = array($queue=>$exec_response[0]); 
+        $this->_bean_data = exec_response; 
 	}
-	private function explodeData() {
-        $this->_bean_file = preg_replace('/\s+/','|',$this->_bean_file);
-	 	$this->_stats_array = explode("|",$this->_bean_file);
+	private function explodeData($line) {
+        $line = preg_replace('/\s+/','|',$line);
+	 	return explode("|",$line);
 	}
 	private function logData() {
         //resource                     held              maxheld              barrier                limit              failcnt
